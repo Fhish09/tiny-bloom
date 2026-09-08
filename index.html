@@ -1,1 +1,409 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Bloom | Luxury Silicone & Reborn Dolls</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Italianno&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: "DM Sans", sans-serif; background: #160d0a; color: #f1dfc8; overflow-x: hidden; }
+        a { color: inherit; text-decoration: none; }
+        button { font-family: inherit; }
+
+        .hero { min-height: 100vh; position: relative; overflow: hidden; background: #160d0a; }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background-image: url("./hero.png");
+            background-size: cover;
+            background-position: 70% center;
+            background-repeat: no-repeat;
+            transform: scale(1.03);
+            animation: heroZoom 18s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        @keyframes heroZoom {
+            0% { transform: scale(1.02); }
+            100% { transform: scale(1.06); }
+        }
+        .hero-overlay {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background:
+                linear-gradient(90deg,
+                    rgba(14, 7, 5, 0.97) 0%,
+                    rgba(22, 11, 8, 0.88) 18%,
+                    rgba(28, 14, 10, 0.62) 34%,
+                    rgba(30, 15, 10, 0.28) 48%,
+                    rgba(25, 12, 8, 0.08) 62%,
+                    transparent 78%),
+                linear-gradient(180deg,
+                    rgba(12, 6, 4, 0.55) 0%,
+                    transparent 28%,
+                    transparent 72%,
+                    rgba(12, 6, 4, 0.65) 100%),
+                radial-gradient(ellipse 55% 60% at 72% 42%,
+                    rgba(180, 110, 60, 0.14) 0%,
+                    transparent 70%);
+        }
+        .hero-vignette {
+            position: absolute; inset: 0; pointer-events: none; z-index: 2;
+            background: radial-gradient(ellipse 90% 80% at 50% 50%,
+                transparent 40%, rgba(10, 5, 3, 0.35) 100%);
+        }
+
+        .navbar {
+            position: absolute; z-index: 30; top: 0; left: 0; width: 100%;
+            padding: 26px 5%; display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid rgba(224, 178, 123, 0.10);
+            backdrop-filter: blur(8px);
+            transition: background 0.4s ease, backdrop-filter 0.4s ease;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon {
+            width: 38px; height: 38px; border: 1px solid #c99b69; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #d7aa75; transform: rotate(-8deg);
+        }
+        .logo-icon i { font-size: 17px; }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-name {
+            font-family: "Cormorant Garamond", serif; font-size: 27px; font-weight: 600;
+            line-height: 0.8; color: #ead3b5;
+        }
+        .logo-tagline { font-size: 7px; letter-spacing: 2px; color: #b99976; margin-top: 7px; }
+        .nav-links {
+            display: flex; align-items: center; gap: 38px;
+            margin-left: auto; margin-right: 38px;
+        }
+        .nav-links a {
+            position: relative; font-size: 12px; font-weight: 400; color: #dbc4aa; transition: 0.3s ease;
+        }
+        .nav-links a::after {
+            content: ""; position: absolute; left: 50%; bottom: -8px; width: 0; height: 1px;
+            background: #d9a96f; transform: translateX(-50%); transition: 0.3s ease;
+        }
+        .nav-links a:hover { color: #e8b979; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; align-items: center; gap: 20px; }
+        .nav-action {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #ddc5a8; cursor: pointer; transition: 0.3s ease;
+        }
+        .nav-action:hover {
+            background: rgba(211, 160, 104, 0.12); color: #e8b979; transform: translateY(-2px);
+        }
+        .cart { position: relative; }
+        .cart-count {
+            position: absolute; top: -5px; right: -5px; width: 15px; height: 15px;
+            background: #c99761; color: #21100a; border-radius: 50%; font-size: 8px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .hero-content {
+            position: relative; z-index: 10; min-height: 100vh; width: 100%;
+            display: flex; align-items: center; padding: 130px 5% 80px;
+        }
+        .hero-copy {
+            width: min(540px, 45%); max-width: 540px;
+            animation: heroReveal 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0;
+        }
+        @keyframes heroReveal {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .eyebrow {
+            display: flex; align-items: center; gap: 13px; margin-bottom: 26px;
+            font-size: 10px; letter-spacing: 3.5px; color: #C69A68; text-transform: uppercase;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+        }
+        .eyebrow::before {
+            content: ""; width: 34px; height: 1px; background: #c79b69; flex-shrink: 0;
+        }
+        .hero-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(56px, 6.8vw, 96px); font-weight: 500; line-height: 0.88;
+            letter-spacing: -2.5px; color: #EAD8C2; max-width: 520px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.35);
+        }
+        .hero-title span {
+            display: block; font-family: "Italianno", cursive;
+            font-size: clamp(48px, 5.2vw, 72px); font-weight: 400; color: #D5A16C;
+            letter-spacing: 0; margin-top: 14px; transform: rotate(-2.5deg);
+            transform-origin: left center; text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+        }
+        .hero-description {
+            max-width: 400px; margin-top: 30px; color: #C5AE97;
+            font-size: 14.5px; line-height: 1.8; font-weight: 300;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.35);
+        }
+        .hero-buttons { display: flex; gap: 16px; margin-top: 38px; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            height: 52px; padding: 0 28px; border-radius: 30px; font-size: 10px;
+            letter-spacing: 2px; font-weight: 600; cursor: pointer; transition: all 0.35s ease;
+        }
+        .btn-primary {
+            background: #D2A06A; color: #24130d; border: 1px solid #D2A06A;
+            box-shadow: 0 10px 30px rgba(201, 145, 91, 0.22);
+        }
+        .btn-primary:hover {
+            background: #e1b27c; transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(201, 145, 91, 0.32);
+        }
+        .btn-primary i { font-size: 9px; }
+        .btn-outline {
+            border: 1px solid rgba(222, 186, 148, 0.5); color: #E2CDB5;
+            background: rgba(25, 12, 8, 0.22); backdrop-filter: blur(6px);
+        }
+        .btn-outline:hover {
+            border-color: #d7a36b; color: #e4b478; transform: translateY(-3px);
+            background: rgba(214, 160, 104, 0.1);
+        }
+
+        .quality-badge {
+            position: absolute; right: 7%; bottom: 16%; z-index: 12;
+            width: 118px; height: 118px; border-radius: 50%;
+            background: rgba(42, 24, 17, 0.72); border: 1px solid rgba(210, 163, 112, 0.35);
+            backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center;
+            text-align: center; box-shadow: 0 22px 50px rgba(0, 0, 0, 0.28);
+            animation: floatingBadge 4.5s ease-in-out infinite;
+        }
+        @keyframes floatingBadge {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1.5deg); }
+        }
+        .quality-badge::before {
+            content: ""; position: absolute; inset: 9px;
+            border: 1px dashed rgba(214, 165, 113, 0.42); border-radius: 50%;
+        }
+        .badge-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 3px; }
+        .badge-content i { color: #d6a46f; font-size: 15px; margin-bottom: 3px; }
+        .badge-content strong {
+            font-family: "Cormorant Garamond", serif; font-size: 15px; font-weight: 600;
+            color: #e9d1b2; letter-spacing: 0.5px;
+        }
+        .badge-content span { font-size: 8px; letter-spacing: 1.2px; color: #ae9379; }
+
+        .scroll-indicator {
+            position: absolute; z-index: 12; bottom: 38px; left: 5%;
+            display: flex; align-items: center; gap: 14px; color: #a58b72;
+            font-size: 8px; letter-spacing: 3px;
+        }
+        .scroll-line {
+            width: 1px; height: 38px;
+            background: linear-gradient(to bottom, #d3a16e, transparent);
+            animation: scrollLine 2.2s infinite;
+        }
+        @keyframes scrollLine {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            51% { transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+        .flower-decoration {
+            position: absolute; right: 4%; top: 32%; z-index: 3; opacity: 0.28;
+            color: #d19a65; font-size: 34px; transform: rotate(22deg); pointer-events: none;
+        }
+
+        .featured {
+            min-height: 80vh; padding: 120px 5%;
+            background: radial-gradient(circle at 50% 0%, rgba(157, 91, 52, 0.15), transparent 40%), #1b0f0b;
+        }
+        .section-heading { text-align: center; max-width: 650px; margin: auto auto 65px; }
+        .section-eyebrow {
+            color: #b88b60; text-transform: uppercase; font-size: 10px;
+            letter-spacing: 4px; margin-bottom: 15px;
+        }
+        .section-heading h2 {
+            font-family: "Cormorant Garamond", serif; font-size: 55px; font-weight: 500; color: #ead5bc;
+        }
+        .section-heading p { margin-top: 15px; color: #a9917d; font-size: 14px; line-height: 1.7; }
+        .product-grid {
+            max-width: 1200px; margin: auto; display: grid;
+            grid-template-columns: repeat(3, 1fr); gap: 25px;
+        }
+        .product-card {
+            position: relative; min-height: 430px; overflow: hidden; border-radius: 18px;
+            background: #281711; border: 1px solid rgba(213, 163, 110, 0.12); transition: 0.5s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-10px); border-color: rgba(213, 163, 110, 0.35);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+        }
+        .product-image {
+            height: 330px; background-size: cover; background-position: center; transition: transform 0.7s ease;
+        }
+        .product-card:hover .product-image { transform: scale(1.06); }
+        .product-info { padding: 20px; }
+        .product-info h3 {
+            font-family: "Cormorant Garamond", serif; font-size: 24px; color: #e7ceb1;
+        }
+        .product-info p { color: #9d8673; font-size: 12px; margin-top: 5px; }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .hero-bg { background-position: 62% center; }
+            .hero-content { align-items: flex-end; padding-bottom: 120px; }
+            .hero-copy { width: 100%; max-width: 480px; }
+            .quality-badge { right: 5%; bottom: 110px; width: 98px; height: 98px; }
+            .product-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .navbar { padding: 20px 5%; }
+            .logo-name { font-size: 23px; }
+            .logo-icon { width: 33px; height: 33px; }
+            .nav-actions { gap: 7px; }
+            .nav-action { width: 30px; }
+            .hero { min-height: 100svh; }
+            .hero-bg { background-position: 66% center; }
+            .hero-overlay {
+                background:
+                    linear-gradient(90deg,
+                        rgba(12, 6, 4, 0.97) 0%,
+                        rgba(18, 9, 6, 0.92) 25%,
+                        rgba(22, 11, 8, 0.7) 48%,
+                        rgba(25, 12, 8, 0.35) 68%,
+                        transparent 88%),
+                    linear-gradient(180deg,
+                        rgba(10, 5, 3, 0.5) 0%,
+                        transparent 30%,
+                        transparent 55%,
+                        rgba(10, 5, 3, 0.75) 100%);
+            }
+            .hero-content { min-height: 100svh; padding: 110px 6% 90px; align-items: flex-end; }
+            .hero-copy { width: 100%; max-width: 100%; }
+            .eyebrow { font-size: 8px; letter-spacing: 2.5px; margin-bottom: 18px; }
+            .hero-title { font-size: 48px; letter-spacing: -1.5px; }
+            .hero-title span { font-size: 42px; margin-top: 8px; }
+            .hero-description { font-size: 13px; max-width: 320px; margin-top: 20px; }
+            .hero-buttons { flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 28px; }
+            .btn { height: 48px; padding: 0 22px; }
+            .quality-badge { width: 82px; height: 82px; right: 5%; bottom: 28px; }
+            .badge-content strong { font-size: 12px; }
+            .badge-content span { font-size: 6px; }
+            .scroll-indicator { display: none; }
+            .flower-decoration { display: none; }
+            .featured { padding: 80px 6%; }
+            .section-heading h2 { font-size: 42px; }
+            .product-grid { grid-template-columns: 1fr; }
+            .product-card { min-height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero" id="home">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-vignette" aria-hidden="true"></div>
+
+        <nav class="navbar">
+            <a href="#home" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-seedling"></i></div>
+                <div class="logo-text">
+                    <div class="logo-name">Tiny Bloom</div>
+                    <div class="logo-tagline">LITTLE DOLLS. ENDLESS LOVE.</div>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#about">About</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-action"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <div class="nav-action"><i class="fa-regular fa-user"></i></div>
+                <div class="nav-action cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-copy">
+                <div class="eyebrow">Realistic • Handcrafted • Forever Yours</div>
+                <h1 class="hero-title">
+                    More Than<br>Just a Doll.
+                    <span>A Little Piece of Love</span>
+                </h1>
+                <p class="hero-description">
+                    Discover beautifully crafted silicone and reborn
+                    baby dolls, designed with incredible detail and
+                    made to feel truly special.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#shop" class="btn btn-primary">
+                        SHOP NOW <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#shop" class="btn btn-outline">EXPLORE COLLECTION</a>
+                </div>
+            </div>
+
+            <div class="quality-badge">
+                <div class="badge-content">
+                    <i class="fa-regular fa-heart"></i>
+                    <strong>Realistic</strong>
+                    <span>DETAILS</span>
+                </div>
+            </div>
+            <div class="flower-decoration">❧</div>
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <span>SCROLL DOWN</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured" id="shop">
+        <div class="section-heading">
+            <div class="section-eyebrow">Our Collection</div>
+            <h2>Meet Your Little One</h2>
+            <p>Carefully crafted dolls created with incredible attention to every tiny detail.</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=900&q=85');"></div>
+                <div class="product-info"><h3>Sweet Willow</h3><p>Handcrafted silicone baby</p></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=900&q=85');"></div>
+                <div class="product-info"><h3>Little Lily</h3><p>Beautifully detailed reborn doll</p></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&w=900&q=85');"></div>
+                <div class="product-info"><h3>Baby Rose</h3><p>Soft details. Timeless beauty.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener("scroll", function () {
+            const navbar = document.querySelector(".navbar");
+            if (window.scrollY > 50) {
+                navbar.style.background = "rgba(18, 9, 6, 0.88)";
+                navbar.style.backdropFilter = "blur(15px)";
+            } else {
+                navbar.style.background = "transparent";
+                navbar.style.backdropFilter = "blur(8px)";
+            }
+        });
+        document.querySelectorAll("a[href^='#']").forEach(function(link) {
+            link.addEventListener("click", function(e) {
+                const target = document.querySelector(this.getAttribute("href"));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: "smooth" });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
