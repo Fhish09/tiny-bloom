@@ -1,1093 +1,1354 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tiny Bloom | Luxury Silicone Baby Dolls</title>
-  <meta name="description" content="Discover beautifully crafted silicone baby dolls and reborn collections at Tiny Bloom. Premium, handcrafted, made to be loved." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --chocolate: #211714;
-      --espresso: #35231E;
-      --mocha: #2A1C18;
-      --cream: #D8C2A8;
-      --dusty-rose: #B98282;
-      --caramel: #A87552;
-      --gold: #C8A46A;
-      --soft-gold: #D4B87A;
-      --text-cream: #E8D9C4;
-      --text-muted: #C4B09A;
-      --card-bg: rgba(53, 35, 30, 0.85);
-      --glass: rgba(216, 194, 168, 0.08);
-      --radius: 24px;
-      --radius-sm: 16px;
-      --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--chocolate);
-      color: var(--text-cream);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-      transition: var(--transition);
-    }
-
-    .container {
-      width: min(1200px, 92%);
-      margin: 0 auto;
-    }
-
-    /* ========== NAV ========== */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 1.1rem 0;
-      background: linear-gradient(to bottom, rgba(33, 23, 20, 0.95), rgba(33, 23, 20, 0.7));
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(200, 164, 106, 0.12);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.85rem;
-      font-weight: 600;
-      color: var(--cream);
-      letter-spacing: 0.04em;
-    }
-
-    .logo span {
-      color: var(--gold);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.9rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .nav-links a:hover {
-      color: var(--gold);
-    }
-
-    .nav-cta {
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      padding: 0.55rem 1.4rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .nav-cta:hover {
-      background: var(--gold);
-      color: var(--chocolate);
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--cream);
-      font-size: 1.6rem;
-      cursor: pointer;
-    }
-
-    /* ========== HERO ========== */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 720px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-      transform: scale(1.05);
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(33, 23, 20, 0.55) 0%,
-        rgba(33, 23, 20, 0.72) 40%,
-        rgba(33, 23, 20, 0.88) 100%
-      );
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 780px;
-      padding: 0 1.5rem;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.85rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.4rem;
-      opacity: 0.9;
-    }
-
-    .hero h1 {
-      font-size: clamp(3.2rem, 7vw, 5.4rem);
-      line-height: 1.05;
-      color: var(--cream);
-      margin-bottom: 1.3rem;
-      font-weight: 500;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto 2.4rem;
-      font-weight: 300;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 2.2rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: var(--transition);
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--gold);
-      color: var(--chocolate);
-    }
-
-    .btn-primary:hover {
-      background: var(--soft-gold);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(200, 164, 106, 0.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid var(--cream);
-      color: var(--cream);
-    }
-
-    .btn-outline:hover {
-      background: rgba(216, 194, 168, 0.12);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    /* ========== FEATURED ========== */
-    .section {
-      padding: 6.5rem 0;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    .section-header h2 {
-      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
-      color: var(--cream);
-      margin-bottom: 0.8rem;
-    }
-
-    .section-header p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
-    }
-
-    .featured-card {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      aspect-ratio: 3/4;
-      background: var(--espresso);
-      box-shadow: var(--shadow);
-    }
-
-    .featured-card img {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.7s ease;
-    }
-
-    .featured-card:hover img {
-      transform: scale(1.08);
-    }
-
-    .featured-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(33, 23, 20, 0.92) 0%, rgba(33, 23, 20, 0.2) 55%, transparent 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 2rem;
-    }
-
-    .featured-overlay h3 {
-      font-size: 1.7rem;
-      color: var(--cream);
-      margin-bottom: 0.4rem;
-    }
-
-    .featured-overlay p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1.1rem;
-    }
-
-    .featured-link {
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .featured-link:hover {
-      gap: 0.7rem;
-    }
-
-    /* ========== WHY ========== */
-    .why {
-      background: var(--espresso);
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
-
-    .why-item {
-      text-align: center;
-      padding: 2rem 1.2rem;
-      border-radius: var(--radius-sm);
-      background: var(--glass);
-      border: 1px solid rgba(200, 164, 106, 0.1);
-      transition: var(--transition);
-    }
-
-    .why-item:hover {
-      border-color: rgba(200, 164, 106, 0.28);
-      transform: translateY(-6px);
-    }
-
-    .why-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 1.3rem;
-      border-radius: 50%;
-      background: rgba(200, 164, 106, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: var(--gold);
-    }
-
-    .why-item h3 {
-      font-size: 1.35rem;
-      color: var(--cream);
-      margin-bottom: 0.6rem;
-    }
-
-    .why-item p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    /* ========== BEST SELLERS ========== */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.8rem;
-    }
-
-    .product-card {
-      background: var(--mocha);
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid rgba(200, 164, 106, 0.08);
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow);
-      border-color: rgba(200, 164, 106, 0.22);
-    }
-
-    .product-image {
-      position: relative;
-      aspect-ratio: 1/1.15;
-      overflow: hidden;
-      background: var(--espresso);
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.6s ease;
-    }
-
-    .product-card:hover .product-image img {
-      transform: scale(1.07);
-    }
-
-    .product-badge {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: var(--dusty-rose);
-      color: var(--cream);
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 0.35rem 0.75rem;
-      border-radius: 50px;
-    }
-
-    .product-info {
-      padding: 1.4rem 1.3rem 1.6rem;
-    }
-
-    .product-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
-      color: var(--cream);
-      margin-bottom: 0.35rem;
-    }
-
-    .product-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 0.9rem;
-      line-height: 1.45;
-    }
-
-    .product-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.1rem;
-    }
-
-    .product-price {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--gold);
-    }
-
-    .product-rating {
-      font-size: 0.85rem;
-      color: var(--soft-gold);
-      letter-spacing: 0.05em;
-    }
-
-    .btn-cart {
-      width: 100%;
-      padding: 0.85rem;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      border-radius: 50px;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: var(--transition);
-      opacity: 0.9;
-      transform: translateY(4px);
-    }
-
-    .product-card:hover .btn-cart {
-      opacity: 1;
-      transform: translateY(0);
-      background: var(--gold);
-      color: var(--chocolate);
-    }
-
-    /* ========== EMOTIONAL ========== */
-    .emotional {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 560px;
-    }
-
-    .emotional-image {
-      background: url('https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
-    }
-
-    .emotional-content {
-      background: var(--espresso);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 4rem 5rem;
-    }
-
-    .emotional-content h2 {
-      font-size: clamp(2.2rem, 3.5vw, 3rem);
-      color: var(--cream);
-      margin-bottom: 1.3rem;
-      line-height: 1.15;
-    }
-
-    .emotional-content p {
-      color: var(--text-muted);
-      font-size: 1.08rem;
-      margin-bottom: 2rem;
-      max-width: 420px;
-      line-height: 1.7;
-    }
-
-    .link-arrow {
-      color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .link-arrow:hover {
-      gap: 0.85rem;
-    }
-
-    /* ========== REVIEWS ========== */
-    .reviews {
-      background: var(--mocha);
-    }
-
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
-    }
-
-    .review-card {
-      background: var(--glass);
-      border: 1px solid rgba(200, 164, 106, 0.12);
-      border-radius: var(--radius);
-      padding: 2.2rem 1.8rem;
-      transition: var(--transition);
-    }
-
-    .review-card:hover {
-      border-color: rgba(200, 164, 106, 0.28);
-      transform: translateY(-5px);
-    }
-
-    .stars {
-      color: var(--gold);
-      font-size: 0.95rem;
-      letter-spacing: 0.12em;
-      margin-bottom: 1.1rem;
-    }
-
-    .review-text {
-      font-size: 1.05rem;
-      color: var(--text-cream);
-      font-style: italic;
-      line-height: 1.65;
-      margin-bottom: 1.4rem;
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .review-author {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-    }
-
-    /* ========== GALLERY ========== */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-
-    .gallery-item {
-      aspect-ratio: 1;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.6s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-
-    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
-    .gallery-item:nth-child(1) img { height: 100%; }
-
-    /* ========== FINAL CTA ========== */
-    .final-cta {
-      position: relative;
-      height: 520px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .final-cta-bg {
-      position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-    }
-
-    .final-cta-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(33, 23, 20, 0.75) 0%, rgba(33, 23, 20, 0.88) 100%);
-    }
-
-    .final-cta-content {
-      position: relative;
-      z-index: 2;
-      max-width: 600px;
-      padding: 0 1.5rem;
-    }
-
-    .final-cta h2 {
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
-      color: var(--cream);
-      margin-bottom: 1rem;
-    }
-
-    .final-cta p {
-      color: var(--text-muted);
-      font-size: 1.15rem;
-      margin-bottom: 2rem;
-    }
-
-    /* ========== FOOTER ========== */
-    footer {
-      background: var(--chocolate);
-      border-top: 1px solid rgba(200, 164, 106, 0.1);
-      padding: 4.5rem 0 2.5rem;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3.5rem;
-    }
-
-    .footer-brand .logo {
-      margin-bottom: 1.1rem;
-      display: inline-block;
-    }
-
-    .footer-brand p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 280px;
-      line-height: 1.6;
-    }
-
-    .footer-col h4 {
-      font-size: 1.05rem;
-      color: var(--cream);
-      margin-bottom: 1.3rem;
-      letter-spacing: 0.04em;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col li {
-      margin-bottom: 0.7rem;
-    }
-
-    .footer-col a {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-    }
-
-    .footer-col a:hover {
-      color: var(--gold);
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(200, 164, 106, 0.1);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 1024px) {
-      .featured-grid,
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .emotional {
-        grid-template-columns: 1fr;
-      }
-      .emotional-image {
-        min-height: 380px;
-      }
-      .emotional-content {
-        padding: 3.5rem 2.5rem;
-      }
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .gallery-item:nth-child(1) {
-        grid-column: span 2;
-        grid-row: span 1;
-        aspect-ratio: 16/9;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav-links,
-      .nav-cta {
-        display: none;
-      }
-      .menu-toggle {
-        display: block;
-      }
-      .featured-grid,
-      .products-grid,
-      .why-grid,
-      .reviews-grid {
-        grid-template-columns: 1fr;
-      }
-      .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .footer-bottom {
-        flex-direction: column;
-        gap: 0.8rem;
-        text-align: center;
-      }
-      .hero {
-        min-height: 640px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tiny Bloom | Luxury Silicone & Reborn Dolls</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Italianno&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #160d0a;
+            color: #f1dfc8;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(17, 9, 7, 0.97) 0%,
+                    rgba(25, 13, 9, 0.87) 28%,
+                    rgba(25, 13, 9, 0.38) 57%,
+                    rgba(20, 10, 7, 0.48) 100%
+                ),
+                url("https://images.unsplash.com/photo-1607453998774-d533f65dac99?auto=format&fit=crop&w=2200&q=90");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Dark cinematic overlay */
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 70% 40%,
+                    rgba(191, 132, 81, 0.18),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    180deg,
+                    rgba(10, 5, 3, 0.55),
+                    transparent 35%,
+                    rgba(10, 5, 3, 0.7)
+                );
+
+            pointer-events: none;
+        }
+
+        /* Warm glow */
+
+        .hero::after {
+            content: "";
+            position: absolute;
+
+            width: 600px;
+            height: 600px;
+
+            right: -200px;
+            bottom: -250px;
+
+            background: rgba(181, 115, 69, 0.13);
+
+            filter: blur(100px);
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+
+        .navbar {
+            position: absolute;
+            z-index: 20;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            padding: 26px 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid rgba(224, 178, 123, 0.12);
+
+            backdrop-filter: blur(8px);
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid #c99b69;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #d7aa75;
+
+            transform: rotate(-8deg);
+        }
+
+        .logo-icon i {
+            font-size: 17px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 27px;
+            font-weight: 600;
+
+            line-height: 0.8;
+
+            color: #ead3b5;
+        }
+
+        .logo-tagline {
+            font-size: 7px;
+
+            letter-spacing: 2px;
+
+            color: #b99976;
+
+            margin-top: 7px;
+        }
+
+
+        /* NAV LINKS */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 38px;
+
+            margin-left: auto;
+            margin-right: 38px;
+        }
+
+        .nav-links a {
+            position: relative;
+
+            font-size: 12px;
+            font-weight: 400;
+
+            color: #dbc4aa;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+            bottom: -8px;
+
+            width: 0;
+            height: 1px;
+
+            background: #d9a96f;
+
+            transform: translateX(-50%);
+
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e8b979;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+
+        /* NAV ICONS */
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-action {
+            width: 32px;
+            height: 32px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #ddc5a8;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-action:hover {
+            background: rgba(211, 160, 104, 0.12);
+            color: #e8b979;
+
+            transform: translateY(-2px);
+        }
+
+        .cart {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+
+            top: -5px;
+            right: -5px;
+
+            width: 15px;
+            height: 15px;
+
+            background: #c99761;
+            color: #21100a;
+
+            border-radius: 50%;
+
+            font-size: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* =========================================
+           HERO CONTENT
+        ========================================= */
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+
+            min-height: 100vh;
+
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            padding: 130px 5% 80px;
+        }
+
+        .hero-copy {
+            width: 570px;
+
+            animation: heroReveal 1.2s ease forwards;
+        }
+
+        @keyframes heroReveal {
+
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* SMALL TITLE */
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            margin-bottom: 23px;
+
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+            color: #caa477;
+
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+
+            width: 34px;
+            height: 1px;
+
+            background: #c79b69;
+        }
+
+
+        /* MAIN TITLE */
+
+        .hero-title {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: clamp(64px, 7vw, 105px);
+
+            font-weight: 500;
+
+            line-height: 0.84;
+
+            letter-spacing: -3px;
+
+            color: #f0ddc5;
+
+            max-width: 600px;
+        }
+
+        .hero-title span {
+            display: block;
+
+            font-family: "Italianno", cursive;
+
+            font-size: clamp(52px, 5vw, 76px);
+
+            font-weight: 400;
+
+            color: #d8a26d;
+
+            letter-spacing: 0;
+
+            margin-top: 12px;
+
+            transform: rotate(-3deg);
+            transform-origin: left center;
+        }
+
+
+        /* DESCRIPTION */
+
+        .hero-description {
+            max-width: 430px;
+
+            margin-top: 32px;
+
+            color: #cdb9a4;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            font-weight: 300;
+        }
+
+
+        /* =========================================
+           BUTTONS
+        ========================================= */
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+
+            margin-top: 35px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            height: 52px;
+
+            padding: 0 27px;
+
+            border-radius: 30px;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.35s ease;
+        }
+
+        .btn-primary {
+            background: #d4a16b;
+
+            color: #24130d;
+
+            border: 1px solid #d4a16b;
+
+            box-shadow:
+                0 10px 30px rgba(201, 145, 91, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #e1b27c;
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 35px rgba(201, 145, 91, 0.3);
+        }
+
+        .btn-primary i {
+            font-size: 9px;
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(222, 186, 148, 0.55);
+
+            color: #e2cdb5;
+
+            background: rgba(25, 12, 8, 0.25);
+
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-outline:hover {
+            border-color: #d7a36b;
+
+            color: #e4b478;
+
+            transform: translateY(-4px);
+
+            background: rgba(214, 160, 104, 0.08);
+        }
+
+
+        /* =========================================
+           FLOATING QUALITY BADGE
+        ========================================= */
+
+        .quality-badge {
+            position: absolute;
+
+            right: 7%;
+            bottom: 15%;
+
+            z-index: 8;
+
+            width: 115px;
+            height: 115px;
+
+            border-radius: 50%;
+
+            background: rgba(50, 28, 19, 0.78);
+
+            border: 1px solid rgba(210, 163, 112, 0.32);
+
+            backdrop-filter: blur(12px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+
+            animation: floatingBadge 4s ease-in-out infinite;
+        }
+
+        @keyframes floatingBadge {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+
+        .quality-badge::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 8px;
+
+            border: 1px dashed rgba(214, 165, 113, 0.45);
+
+            border-radius: 50%;
+        }
+
+        .badge-content {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .badge-content i {
+            color: #d6a46f;
+
+            font-size: 15px;
+
+            margin-bottom: 2px;
+        }
+
+        .badge-content strong {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            color: #e9d1b2;
+        }
+
+        .badge-content span {
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            color: #ae9379;
+        }
+
+
+        /* =========================================
+           SCROLL INDICATOR
+        ========================================= */
+
+        .scroll-indicator {
+            position: absolute;
+
+            z-index: 8;
+
+            bottom: 35px;
+            left: 5%;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            color: #a58b72;
+
+            font-size: 8px;
+
+            letter-spacing: 3px;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 36px;
+
+            background: linear-gradient(
+                to bottom,
+                #d3a16e,
+                transparent
+            );
+
+            animation: scrollLine 2s infinite;
+        }
+
+        @keyframes scrollLine {
+
+            0% {
+                transform: scaleY(0);
+                transform-origin: top;
+            }
+
+            50% {
+                transform: scaleY(1);
+                transform-origin: top;
+            }
+
+            51% {
+                transform-origin: bottom;
+            }
+
+            100% {
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+        }
+
+
+        /* =========================================
+           DECORATIVE FLOWER
+        ========================================= */
+
+        .flower-decoration {
+            position: absolute;
+
+            right: 4%;
+            top: 34%;
+
+            z-index: 3;
+
+            opacity: 0.35;
+
+            color: #d19a65;
+
+            font-size: 35px;
+
+            transform: rotate(25deg);
+        }
+
+
+        /* =========================================
+           NEXT SECTION
+        ========================================= */
+
+        .featured {
+            min-height: 80vh;
+
+            padding: 120px 5%;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(157, 91, 52, 0.15),
+                    transparent 40%
+                ),
+                #1b0f0b;
+        }
+
+        .section-heading {
+            text-align: center;
+
+            max-width: 650px;
+
+            margin: auto auto 65px;
+        }
+
+        .section-eyebrow {
+            color: #b88b60;
+
+            text-transform: uppercase;
+
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 15px;
+        }
+
+        .section-heading h2 {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 55px;
+
+            font-weight: 500;
+
+            color: #ead5bc;
+        }
+
+        .section-heading p {
+            margin-top: 15px;
+
+            color: #a9917d;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        /* PRODUCT PLACEHOLDERS */
+
+        .product-grid {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .product-card {
+            position: relative;
+
+            min-height: 430px;
+
+            overflow: hidden;
+
+            border-radius: 18px;
+
+            background: #281711;
+
+            border: 1px solid rgba(213, 163, 110, 0.12);
+
+            transition: 0.5s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+
+            border-color: rgba(213, 163, 110, 0.35);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            height: 330px;
+
+            background-size: cover;
+            background-position: center;
+
+            transition: transform 0.7s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.06);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 24px;
+
+            color: #e7ceb1;
+        }
+
+        .product-info p {
+            color: #9d8673;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                background-position: 62% center;
+
+                background-image:
+                    linear-gradient(
+                        90deg,
+                        rgba(17, 9, 7, 0.96) 0%,
+                        rgba(17, 9, 7, 0.76) 55%,
+                        rgba(17, 9, 7, 0.35) 100%
+                    ),
+                    url("https://images.unsplash.com/photo-1607453998774-d533f65dac99?auto=format&fit=crop&w=1600&q=90");
+            }
+
+            .hero-content {
+                align-items: flex-end;
+
+                padding-bottom: 110px;
+            }
+
+            .quality-badge {
+                right: 5%;
+                bottom: 100px;
+
+                width: 95px;
+                height: 95px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 20px 5%;
+            }
+
+            .logo-name {
+                font-size: 23px;
+            }
+
+            .logo-icon {
+                width: 33px;
+                height: 33px;
+            }
+
+            .nav-actions {
+                gap: 7px;
+            }
+
+            .nav-action {
+                width: 30px;
+            }
+
+            .hero {
+                min-height: 100svh;
+
+                background-position:
+                    66% center;
+            }
+
+            .hero-content {
+                min-height: 100svh;
+
+                padding:
+                    120px 7%
+                    100px;
+            }
+
+            .hero-copy {
+                width: 100%;
+            }
+
+            .eyebrow {
+                font-size: 8px;
+
+                letter-spacing: 3px;
+            }
+
+            .hero-title {
+                font-size: 58px;
+
+                letter-spacing: -2px;
+            }
+
+            .hero-title span {
+                font-size: 49px;
+            }
+
+            .hero-description {
+                font-size: 12px;
+
+                max-width: 330px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .btn {
+                height: 48px;
+
+                padding: 0 22px;
+            }
+
+            .quality-badge {
+                width: 85px;
+                height: 85px;
+
+                right: 6%;
+
+                bottom: 30px;
+            }
+
+            .badge-content strong {
+                font-size: 13px;
+            }
+
+            .badge-content span {
+                font-size: 6px;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .flower-decoration {
+                display: none;
+            }
+
+            .featured {
+                padding: 80px 6%;
+            }
+
+            .section-heading h2 {
+                font-size: 42px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card {
+                min-height: 400px;
+            }
+        }
+
+    </style>
 </head>
+
+
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#" class="logo">Tiny <span>Bloom</span></a>
-      <ul class="nav-links">
-        <li><a href="#collection">Collection</a></li>
-        <li><a href="#bestsellers">Best Sellers</a></li>
-        <li><a href="#story">Our Story</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-      </ul>
-      <a href="#bestsellers" class="nav-cta">Shop Now</a>
-      <button class="menu-toggle" aria-label="Menu">☰</button>
-    </div>
-  </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Luxury Reborn Collection</p>
-      <h1>Made to Be Loved.</h1>
-      <p>Discover beautifully crafted silicone baby dolls, designed with incredible detail and made to feel truly special.</p>
-      <div class="hero-buttons">
-        <a href="#bestsellers" class="btn btn-primary">Shop Baby Dolls</a>
-        <a href="#collection" class="btn btn-outline">Explore Collection</a>
-      </div>
-    </div>
-  </section>
+    <!-- =========================================
+         HERO SECTION
+    ========================================= -->
 
-  <!-- FEATURED COLLECTION -->
-  <section class="section" id="collection">
-    <div class="container">
-      <div class="section-header">
-        <h2>Meet Your Little One</h2>
-        <p>Three carefully curated collections for every heart.</p>
-      </div>
-      <div class="featured-grid">
-        <article class="featured-card">
-          <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="Silicone Babies" />
-          <div class="featured-overlay">
-            <h3>Silicone Babies</h3>
-            <p>Realistic full-body silicone dolls with soft, lifelike weight.</p>
-            <a href="#bestsellers" class="featured-link">Shop Now →</a>
-          </div>
-        </article>
-        <article class="featured-card">
-          <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80" alt="Reborn Collection" />
-          <div class="featured-overlay">
-            <h3>Reborn Collection</h3>
-            <p>Handcrafted dolls with incredible detail and character.</p>
-            <a href="#bestsellers" class="featured-link">Shop Now →</a>
-          </div>
-        </article>
-        <article class="featured-card">
-          <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80" alt="Baby Essentials" />
-          <div class="featured-overlay">
-            <h3>Baby Essentials</h3>
-            <p>Clothes, accessories & thoughtful keepsakes.</p>
-            <a href="#bestsellers" class="featured-link">Shop Now →</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
+    <section class="hero" id="home">
 
-  <!-- WHY YOU'LL LOVE THEM -->
-  <section class="section why">
-    <div class="container">
-      <div class="section-header">
-        <h2>Why You’ll Love Them</h2>
-        <p>Every detail is designed to create a lasting connection.</p>
-      </div>
-      <div class="why-grid">
-        <div class="why-item">
-          <div class="why-icon">✨</div>
-          <h3>Ultra Realistic</h3>
-          <p>Detailed skin, hair and tiny features that capture the beauty of a newborn.</p>
-        </div>
-        <div class="why-item">
-          <div class="why-icon">👐</div>
-          <h3>Handcrafted</h3>
-          <p>Carefully created with attention to every delicate detail and finish.</p>
-        </div>
-        <div class="why-item">
-          <div class="why-icon">🫧</div>
-          <h3>Premium Silicone</h3>
-          <p>Soft, flexible and beautifully finished platinum-grade silicone.</p>
-        </div>
-        <div class="why-item">
-          <div class="why-icon">💛</div>
-          <h3>Made for Memories</h3>
-          <p>A special addition to any collection, ready to be cherished for years.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- BEST SELLERS -->
-  <section class="section" id="bestsellers">
-    <div class="container">
-      <div class="section-header">
-        <h2>Our Most Loved Babies</h2>
-        <p>Real-world pricing for premium full-body silicone dolls.</p>
-      </div>
-      <div class="products-grid">
+        <!-- NAVIGATION -->
 
-        <article class="product-card">
-          <div class="product-image">
-            <span class="product-badge">Bestseller</span>
-            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=700&q=80" alt="Luna - 18 inch silicone baby" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Luna</h3>
-            <p class="product-desc">18″ full-body silicone · open eyes · rooted hair</p>
-            <div class="product-meta">
-              <span class="product-price">$349</span>
-              <span class="product-rating">★★★★★</span>
+        <nav class="navbar">
+
+            <!-- LOGO -->
+
+            <a href="#home" class="logo">
+
+                <div class="logo-icon">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+
+                <div class="logo-text">
+
+                    <div class="logo-name">
+                        Tiny Bloom
+                    </div>
+
+                    <div class="logo-tagline">
+                        LITTLE DOLLS. ENDLESS LOVE.
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAV LINKS -->
+
+            <div class="nav-links">
+
+                <a href="#home">Home</a>
+
+                <a href="#shop">Shop</a>
+
+                <a href="#about">About</a>
+
+                <a href="#reviews">Reviews</a>
+
+                <a href="#contact">Contact</a>
+
             </div>
-            <button class="btn-cart">Add to Cart</button>
-          </div>
-        </article>
 
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=700&q=80" alt="Oliver - 19 inch silicone baby" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Oliver</h3>
-            <p class="product-desc">19″ full-body silicone · sleeping face · weighted</p>
-            <div class="product-meta">
-              <span class="product-price">$389</span>
-              <span class="product-rating">★★★★★</span>
+
+            <!-- NAV ICONS -->
+
+            <div class="nav-actions">
+
+                <div class="nav-action">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+
+                <div class="nav-action">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+
+                <div class="nav-action cart">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    <span class="cart-count">
+                        0
+                    </span>
+
+                </div>
+
             </div>
-            <button class="btn-cart">Add to Cart</button>
-          </div>
-        </article>
 
-        <article class="product-card">
-          <div class="product-image">
-            <span class="product-badge">New</span>
-            <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=700&q=80" alt="Sophia - 16 inch silicone baby" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Sophia</h3>
-            <p class="product-desc">16″ full-body silicone · drink & wet system</p>
-            <div class="product-meta">
-              <span class="product-price">$299</span>
-              <span class="product-rating">★★★★☆</span>
+        </nav>
+
+
+
+        <!-- HERO CONTENT -->
+
+        <div class="hero-content">
+
+            <div class="hero-copy">
+
+
+                <!-- EYEBROW -->
+
+                <div class="eyebrow">
+                    Realistic • Handcrafted • Forever Yours
+                </div>
+
+
+                <!-- MAIN HEADING -->
+
+                <h1 class="hero-title">
+
+                    More Than
+                    <br>
+
+                    Just a Doll.
+
+                    <span>
+                        A Little Piece of Love
+                    </span>
+
+                </h1>
+
+
+                <!-- DESCRIPTION -->
+
+                <p class="hero-description">
+
+                    Discover beautifully crafted silicone and reborn
+                    baby dolls, designed with incredible detail and
+                    made to feel truly special.
+
+                </p>
+
+
+                <!-- BUTTONS -->
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#shop"
+                        class="btn btn-primary"
+                    >
+
+                        SHOP NOW
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a
+                        href="#shop"
+                        class="btn btn-outline"
+                    >
+
+                        EXPLORE COLLECTION
+
+                    </a>
+
+                </div>
+
             </div>
-            <button class="btn-cart">Add to Cart</button>
-          </div>
-        </article>
 
-        <article class="product-card">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=700&q=80" alt="Ethan - 20 inch silicone baby" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Ethan</h3>
-            <p class="product-desc">20″ full-body silicone · hand-painted details</p>
-            <div class="product-meta">
-              <span class="product-price">$429</span>
-              <span class="product-rating">★★★★★</span>
+
+            <!-- QUALITY BADGE -->
+
+            <div class="quality-badge">
+
+                <div class="badge-content">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                    <strong>
+                        Realistic
+                    </strong>
+
+                    <span>
+                        DETAILS
+                    </span>
+
+                </div>
+
             </div>
-            <button class="btn-cart">Add to Cart</button>
-          </div>
-        </article>
 
-      </div>
-    </div>
-  </section>
 
-  <!-- EMOTIONAL SECTION -->
-  <section class="emotional" id="story">
-    <div class="emotional-image"></div>
-    <div class="emotional-content">
-      <h2>Every Little Detail Matters.</h2>
-      <p>From tiny fingers to delicate facial features, every doll is designed to capture the beauty of a newborn. Soft platinum silicone, carefully weighted bodies, and hand-finished details make each little one feel truly special.</p>
-      <a href="#" class="link-arrow">Discover Our Story →</a>
-    </div>
-  </section>
+            <!-- DECORATION -->
 
-  <!-- REVIEWS -->
-  <section class="section reviews" id="reviews">
-    <div class="container">
-      <div class="section-header">
-        <h2>Loved by Families</h2>
-        <p>Real words from people who found their little one.</p>
-      </div>
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p class="review-text">“She looks even more beautiful in person. Absolutely adorable and so soft to hold.”</p>
-          <p class="review-author">— Sarah M.</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p class="review-text">“The weight and the details are incredible. It feels like holding a real newborn. Worth every penny.”</p>
-          <p class="review-author">— James & Elena</p>
-        </div>
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p class="review-text">“I ordered Luna as a gift and the packaging, the quality, everything was pure luxury. Highly recommend.”</p>
-          <p class="review-author">— Priya K.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="flower-decoration">
+                ❧
+            </div>
 
-  <!-- GALLERY -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Little Moments ✨</h2>
-        <p>Quiet, tender, and full of love.</p>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=80" alt="Gallery 1" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80" alt="Gallery 2" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=600&q=80" alt="Gallery 3" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=600&q=80" alt="Gallery 4" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?auto=format&fit=crop&w=600&q=80" alt="Gallery 5" />
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FINAL CTA -->
-  <section class="final-cta">
-    <div class="final-cta-bg"></div>
-    <div class="final-cta-overlay"></div>
-    <div class="final-cta-content">
-      <h2>Find Your Little One</h2>
-      <p>A little bundle of joy is waiting for you.</p>
-      <a href="#bestsellers" class="btn btn-primary">Shop the Collection</a>
-    </div>
-  </section>
+            <!-- SCROLL -->
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="#" class="logo">Tiny <span>Bloom</span></a>
-          <p>Luxury silicone baby dolls and reborn collections, crafted with care and made to be loved.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Shop</h4>
-          <ul>
-            <li><a href="#bestsellers">All Babies</a></li>
-            <li><a href="#collection">Collections</a></li>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="#">Accessories</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>About</h4>
-          <ul>
-            <li><a href="#story">Our Story</a></li>
-            <li><a href="#">Craftsmanship</a></li>
-            <li><a href="#reviews">Reviews</a></li>
-            <li><a href="#">Care Guide</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Help</h4>
-          <ul>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="#">Returns</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">FAQ</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Tiny Bloom. All rights reserved.</span>
-        <span>Made with care for little hearts.</span>
-      </div>
-    </div>
-  </footer>
+            <div class="scroll-indicator">
 
-  <script>
-    // Smooth hover feedback for Add to Cart
-    document.querySelectorAll('.btn-cart').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const original = this.textContent;
-        this.textContent = 'Added ✓';
-        this.style.background = 'var(--gold)';
-        this.style.color = 'var(--chocolate)';
-        setTimeout(() => {
-          this.textContent = original;
-        }, 1600);
-      });
-    });
-  </script>
+                <div class="scroll-line"></div>
+
+                <span>
+                    SCROLL DOWN
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FEATURED SECTION
+    ========================================= -->
+
+    <section class="featured" id="shop">
+
+
+        <div class="section-heading">
+
+            <div class="section-eyebrow">
+                Our Collection
+            </div>
+
+            <h2>
+                Meet Your Little One
+            </h2>
+
+            <p>
+                Carefully crafted dolls created with incredible
+                attention to every tiny detail.
+            </p>
+
+        </div>
+
+
+        <div class="product-grid">
+
+
+            <!-- PRODUCT 1 -->
+
+            <div class="product-card">
+
+                <div
+                    class="product-image"
+                    style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=900&q=85');
+                    "
+                ></div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Sweet Willow
+                    </h3>
+
+                    <p>
+                        Handcrafted silicone baby
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 2 -->
+
+            <div class="product-card">
+
+                <div
+                    class="product-image"
+                    style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=900&q=85');
+                    "
+                ></div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Little Lily
+                    </h3>
+
+                    <p>
+                        Beautifully detailed reborn doll
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+
+            <div class="product-card">
+
+                <div
+                    class="product-image"
+                    style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&w=900&q=85');
+                    "
+                ></div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Baby Rose
+                    </h3>
+
+                    <p>
+                        Soft details. Timeless beauty.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SIMPLE JAVASCRIPT
+    ========================================= -->
+
+    <script>
+
+        /* Change navbar slightly when scrolling */
+
+        window.addEventListener("scroll", function () {
+
+            const navbar =
+                document.querySelector(".navbar");
+
+            if (window.scrollY > 50) {
+
+                navbar.style.background =
+                    "rgba(18, 9, 6, 0.88)";
+
+                navbar.style.backdropFilter =
+                    "blur(15px)";
+
+            } else {
+
+                navbar.style.background =
+                    "transparent";
+
+                navbar.style.backdropFilter =
+                    "blur(8px)";
+            }
+
+        });
+
+
+        /* Smooth button interaction */
+
+        document.querySelectorAll("a[href^='#']")
+            .forEach(function(link) {
+
+                link.addEventListener("click", function(e) {
+
+                    const target =
+                        document.querySelector(
+                            this.getAttribute("href")
+                        );
+
+                    if (target) {
+
+                        e.preventDefault();
+
+                        target.scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                    }
+
+                });
+
+            });
+
+    </script>
+
 </body>
 </html>
