@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product | Tiny Bloom</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:"DM Sans",sans-serif;background:#160d0a;color:#f1dfc8;min-height:100vh}a{color:inherit;text-decoration:none}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:20px 5%;border-bottom:1px solid rgba(224,178,123,.12);background:rgba(18,9,6,.92);backdrop-filter:blur(12px)}
+.logo{font-family:"Cormorant Garamond",serif;font-size:24px;color:#ead3b5}.logo span{color:#c99a63}
+.topbar nav{display:flex;gap:28px;font-size:12px;color:#dbc4aa}
+.wrap{max-width:1100px;margin:0 auto;padding:40px 5% 80px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+@media(max-width:800px){.wrap{grid-template-columns:1fr;gap:28px}}
+.photo{height:min(560px,70vh);border-radius:24px;border:1px solid rgba(201,154,99,.35);background:#281711 center top/cover no-repeat}
+.eyebrow{color:#c99a63;font-size:10px;letter-spacing:4px;margin-bottom:12px}
+h1{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(34px,4vw,48px);color:#ead8c2;line-height:1.1}
+.rating{margin:12px 0;color:#c99a63;letter-spacing:1px;font-size:13px}
+.price{font-size:28px;color:#d2a06a;font-weight:600;margin:10px 0 18px}
+.desc{color:#bfa890;font-size:14px;line-height:1.8;max-width:420px}
+.features{margin:22px 0;padding:18px;border-radius:16px;border:1px solid rgba(201,154,99,.18);background:rgba(40,23,17,.6)}
+.features li{list-style:none;color:#a9917d;font-size:13px;line-height:1.9}.features li::before{content:"✦ ";color:#c99a63}
+.qty{display:flex;align-items:center;gap:12px;margin:22px 0}
+.qty label{font-size:11px;letter-spacing:1px;color:#a9917d}
+.qty input{width:64px;height:40px;border-radius:10px;border:1px solid rgba(201,154,99,.35);background:#1b0f0b;color:#ead8c2;text-align:center;font-size:14px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 26px;border-radius:30px;border:none;background:linear-gradient(135deg,#bd8146,#81502e);color:#180b06;font-size:11px;font-weight:700;letter-spacing:1.5px;cursor:pointer}
+.btn-outline{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:30px;border:1px solid rgba(222,186,148,.45);color:#E2CDB5;font-size:11px;letter-spacing:1.5px}
+.note{margin-top:16px;color:#6d5b4d;font-size:11px}
+</style>
+</head>
+<body>
+<header class="topbar"><a class="logo" href="index.html">TINY <span>BLOOM</span></a><nav><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="index.html#reviews">Reviews</a></nav></header>
+<main class="wrap">
+  <div class="photo" id="photo"></div>
+  <div>
+    <div class="eyebrow">TINY BLOOM DOLL</div>
+    <h1 id="name">Loading…</h1>
+    <div class="rating" id="rating"></div>
+    <div class="price" id="price"></div>
+    <p class="desc" id="desc"></p>
+    <ul class="features"><li>Premium silicone / reborn finish</li><li>Hand-detailed features</li><li>Secure packaging & careful shipping</li></ul>
+    <div class="qty"><label for="qty">QTY</label><input id="qty" type="number" min="1" max="5" value="1"></div>
+    <div class="actions"><button class="btn-primary" id="bookBtn" type="button">BOOK THIS DOLL →</button><a class="btn-outline" href="shop.html">BACK TO SHOP</a></div>
+    <p class="note">You’ll enter delivery details on the next step.</p>
+  </div>
+</main>
+<script>
+const PRODUCTS={"sweet-willow":{name:"Sweet Willow",price:349,rating:"★★★★★",img:"images/sweet-willow.jpg",desc:"Full-body platinum silicone newborn with hand-painted translucent skin layers, delicate mottling, and softly rooted hair."},"little-lily":{name:"Little Lily",price:289,rating:"★★★★★",img:"images/little-lily.jpg",desc:"Sleeping reborn with gentle closed eyes, finely painted lashes and brows, and a softly weighted body."},"baby-rose":{name:"Baby Rose",price:319,rating:"★★★★☆",img:"images/baby-rose.jpg",desc:"Soft platinum silicone with hand-finished rosy cheeks, tiny detailed fingers and toes."},"mia-grace":{name:"Mia Grace",price:379,rating:"★★★★★",img:"images/mia-grace.jpg",desc:"Awake expression with rooted lashes, subtle skin veining and mottling."},"emma-bloom":{name:"Emma Bloom",price:259,rating:"★★★★★",img:"images/emma-bloom.jpg",desc:"Handcrafted finish with a soft, rounded belly and translucent skin layers."},"sofia":{name:"Sofia",price:429,rating:"★★★★★",img:"images/sofia.jpg",desc:"Premium full-body silicone with an open mouth and soft, flexible limbs."},"amelia":{name:"Amelia",price:299,rating:"★★★★☆",img:"images/amelia.jpg",desc:"Soft skin texture, carefully weighted body and a gentle sleeping face."},"luna":{name:"Luna",price:399,rating:"★★★★★",img:"images/luna.jpg",desc:"Exquisite hand-painted skin, rooted hair and a calm, peaceful expression."}};
+const id=new URLSearchParams(location.search).get("id")||"sweet-willow";
+const p=PRODUCTS[id]||PRODUCTS["sweet-willow"];
+document.title=p.name+" | Tiny Bloom";
+document.getElementById("name").textContent=p.name;
+document.getElementById("rating").textContent=p.rating+"  ·  Verified reviews";
+document.getElementById("price").textContent="$"+p.price;
+document.getElementById("desc").textContent=p.desc;
+document.getElementById("photo").style.backgroundImage="url('"+p.img+"')";
+document.getElementById("bookBtn").addEventListener("click",function(){const qty=Math.max(1,Math.min(5,parseInt(document.getElementById("qty").value,10)||1));localStorage.setItem("tinyBloomOrder",JSON.stringify({id:id,name:p.name,price:p.price,qty:qty,img:p.img,total:p.price*qty}));location.href="checkout.html"});
+</script>
+</body>
+</html>
