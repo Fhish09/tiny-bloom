@@ -1,0 +1,1 @@
+Gallery section added to index.html locally. Place photos in images/gallery1.jpg through images/gallery9.jpg. Until then cards fall back to existing product images (sweet-willow.jpg, little-lily.jpg, etc.).
