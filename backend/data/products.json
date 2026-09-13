@@ -1,0 +1,74 @@
+[
+  {
+    "id": "sweet-willow",
+    "name": "Sweet Willow",
+    "price": 349,
+    "rating": "★★★★★",
+    "image": "images/sweet-willow.jpg",
+    "description": "Full-body platinum silicone newborn with hand-painted translucent skin layers, delicate mottling, and softly rooted hair.",
+    "stock": 5
+  },
+  {
+    "id": "little-lily",
+    "name": "Little Lily",
+    "price": 289,
+    "rating": "★★★★★",
+    "image": "images/little-lily.jpg",
+    "description": "Sleeping reborn with gentle closed eyes, finely painted lashes and brows, and a softly weighted body.",
+    "stock": 8
+  },
+  {
+    "id": "baby-rose",
+    "name": "Baby Rose",
+    "price": 319,
+    "rating": "★★★★☆",
+    "image": "images/baby-rose.jpg",
+    "description": "Soft platinum silicone with hand-finished rosy cheeks, tiny detailed fingers and toes.",
+    "stock": 6
+  },
+  {
+    "id": "mia-grace",
+    "name": "Mia Grace",
+    "price": 379,
+    "rating": "★★★★★",
+    "image": "images/mia-grace.jpg",
+    "description": "Awake expression with rooted lashes, subtle skin veining and mottling.",
+    "stock": 4
+  },
+  {
+    "id": "emma-bloom",
+    "name": "Emma Bloom",
+    "price": 259,
+    "rating": "★★★★★",
+    "image": "images/emma-bloom.jpg",
+    "description": "Handcrafted finish with a soft, rounded belly and translucent skin layers.",
+    "stock": 10
+  },
+  {
+    "id": "sofia",
+    "name": "Sofia",
+    "price": 429,
+    "rating": "★★★★★",
+    "image": "images/sofia.jpg",
+    "description": "Premium full-body silicone with an open mouth and soft, flexible limbs.",
+    "stock": 3
+  },
+  {
+    "id": "amelia",
+    "name": "Amelia",
+    "price": 299,
+    "rating": "★★★★☆",
+    "image": "images/amelia.jpg",
+    "description": "Soft skin texture, carefully weighted body and a gentle sleeping face.",
+    "stock": 7
+  },
+  {
+    "id": "luna",
+    "name": "Luna",
+    "price": 399,
+    "rating": "★★★★★",
+    "image": "images/luna.jpg",
+    "description": "Exquisite hand-painted skin, rooted hair and a calm, peaceful expression.",
+    "stock": 5
+  }
+]

@@ -4,72 +4,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout | Tiny Bloom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:"DM Sans",sans-serif;background:#160d0a;color:#f1dfc8;min-height:100vh}a{color:inherit;text-decoration:none}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"DM Sans",sans-serif;background:#160d0a;color:#f1dfc8;min-height:100vh}
+a{color:inherit;text-decoration:none}
 .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:20px 5%;border-bottom:1px solid rgba(224,178,123,.12);background:rgba(18,9,6,.92);backdrop-filter:blur(12px)}
-.logo{font-family:"Cormorant Garamond",serif;font-size:24px;color:#ead3b5}.logo span{color:#c99a63}
+.logo{font-family:"Cormorant Garamond",serif;font-size:24px;color:#ead3b5}
+.logo span{color:#c99a63}
 .wrap{max-width:1000px;margin:0 auto;padding:40px 5% 80px;display:grid;grid-template-columns:1.15fr .85fr;gap:36px}
 @media(max-width:800px){.wrap{grid-template-columns:1fr}}
 h1{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(32px,4vw,44px);color:#ead8c2;margin-bottom:8px}
 .sub{color:#a9917d;font-size:13px;margin-bottom:28px}
 .card{border-radius:20px;border:1px solid rgba(201,154,99,.2);background:rgba(40,23,17,.55);padding:24px}
 label{display:block;font-size:10px;letter-spacing:1.5px;color:#c99a63;margin:14px 0 6px}
-input,textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(201,154,99,.28);background:#1b0f0b;color:#ead8c2;font-family:inherit;font-size:13px;outline:none}
-input:focus,textarea:focus{border-color:#c99a63}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:500px){.row2{grid-template-columns:1fr}}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(201,154,99,.28);background:#1b0f0b;color:#ead8c2;font-family:inherit;font-size:13px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#c99a63}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.row2{grid-template-columns:1fr}}
 .btn{margin-top:22px;width:100%;height:50px;border:none;border-radius:30px;background:linear-gradient(135deg,#bd8146,#81502e);color:#180b06;font-size:11px;font-weight:700;letter-spacing:1.5px;cursor:pointer}
+.btn:hover{filter:brightness(1.05)}
 .summary h2{font-family:"Cormorant Garamond",serif;font-size:22px;color:#e7ceb1;font-weight:500;margin-bottom:16px}
 .line{display:flex;justify-content:space-between;gap:12px;color:#bfa890;font-size:13px;margin:8px 0}
 .total{margin-top:14px;padding-top:14px;border-top:1px solid rgba(201,154,99,.2);display:flex;justify-content:space-between;font-size:16px;color:#d2a06a;font-weight:600}
 .thumb{width:72px;height:72px;border-radius:12px;background:#281711 center/cover;border:1px solid rgba(201,154,99,.25);flex-shrink:0}
 .item{display:flex;gap:14px;align-items:center;margin-bottom:18px}
-.item strong{display:block;color:#e7ceb1;font-size:14px}.item span{color:#9d8673;font-size:12px}
+.item strong{display:block;color:#e7ceb1;font-size:14px}
+.item span{color:#9d8673;font-size:12px}
 .back{display:inline-block;margin-bottom:18px;color:#c99a63;font-size:12px}
 </style>
 </head>
 <body>
-<header class="topbar"><a class="logo" href="index.html">TINY <span>BLOOM</span></a><a href="shop.html" style="font-size:12px;color:#dbc4aa">← Shop</a></header>
+<header class="topbar">
+  <a class="logo" href="index.html">TINY <span>BLOOM</span></a>
+  <a href="shop.html" style="font-size:12px;color:#dbc4aa">← Shop</a>
+</header>
 <main class="wrap">
-<section>
-<a class="back" href="javascript:history.back()">← Back</a>
-<h1>Delivery details</h1>
-<p class="sub">Tell us where to send your little one. (Demo checkout — no real payment is taken.)</p>
-<form class="card" id="checkoutForm">
-<label for="fullName">FULL NAME</label><input id="fullName" required placeholder="Your full name">
-<label for="email">EMAIL</label><input id="email" type="email" required placeholder="you@email.com">
-<label for="phone">PHONE</label><input id="phone" type="tel" required placeholder="+1 000 000 0000">
-<label for="address">STREET ADDRESS</label><input id="address" required placeholder="House number and street">
-<div class="row2"><div><label for="city">CITY</label><input id="city" required></div><div><label for="postal">POSTAL / ZIP</label><input id="postal" required></div></div>
-<label for="country">COUNTRY</label><input id="country" required placeholder="Country">
-<label for="notes">ORDER NOTES (OPTIONAL)</label><textarea id="notes" rows="3" placeholder="Gift message or delivery note"></textarea>
-<button class="btn" type="submit">PLACE ORDER →</button>
-</form>
-</section>
-<aside class="card summary">
-<h2>Order summary</h2>
-<div class="item"><div class="thumb" id="thumb"></div><div><strong id="sName">—</strong><span id="sQty">Qty 1</span></div></div>
-<div class="line"><span>Subtotal</span><span id="sSub">$0</span></div>
-<div class="line"><span>Shipping</span><span>Free</span></div>
-<div class="total"><span>Total</span><span id="sTotal">$0</span></div>
-</aside>
+  <section>
+    <a class="back" href="javascript:history.back()">← Back</a>
+    <h1>Delivery details</h1>
+    <p class="sub">Tell us where to send your little one. Payment is confirmed on this step (demo — no real charge).</p>
+    <form class="card" id="checkoutForm">
+      <label for="fullName">FULL NAME</label>
+      <input id="fullName" name="fullName" required placeholder="Your full name">
+      <label for="email">EMAIL</label>
+      <input id="email" name="email" type="email" required placeholder="you@email.com">
+      <label for="phone">PHONE</label>
+      <input id="phone" name="phone" type="tel" required placeholder="+1 000 000 0000">
+      <label for="address">STREET ADDRESS</label>
+      <input id="address" name="address" required placeholder="House number and street">
+      <div class="row2">
+        <div><label for="city">CITY</label><input id="city" name="city" required></div>
+        <div><label for="postal">POSTAL / ZIP</label><input id="postal" name="postal" required></div>
+      </div>
+      <label for="country">COUNTRY</label>
+      <input id="country" name="country" required placeholder="Country">
+      <label for="notes">ORDER NOTES (OPTIONAL)</label>
+      <textarea id="notes" name="notes" rows="3" placeholder="Gift message or delivery note"></textarea>
+      <button class="btn" type="submit">PLACE ORDER →</button>
+    </form>
+  </section>
+  <aside class="card summary">
+    <h2>Order summary</h2>
+    <div class="item">
+      <div class="thumb" id="thumb"></div>
+      <div><strong id="sName">—</strong><span id="sQty">Qty 1</span></div>
+    </div>
+    <div class="line"><span>Subtotal</span><span id="sSub">$0</span></div>
+    <div class="line"><span>Shipping</span><span>Free</span></div>
+    <div class="total"><span>Total</span><span id="sTotal">$0</span></div>
+  </aside>
 </main>
 <script>
-const order=JSON.parse(localStorage.getItem("tinyBloomOrder")||"null");
-if(!order){location.href="shop.html"}
-document.getElementById("sName").textContent=order.name;
-document.getElementById("sQty").textContent="Qty "+order.qty;
-document.getElementById("sSub").textContent="$"+order.total;
-document.getElementById("sTotal").textContent="$"+order.total;
-document.getElementById("thumb").style.backgroundImage="url('"+order.img+"')";
-document.getElementById("checkoutForm").addEventListener("submit",function(e){
-e.preventDefault();
-const start=new Date();start.setDate(start.getDate()+7);
-const end=new Date();end.setDate(end.getDate()+12);
-const data={order:order,customer:{fullName:document.getElementById("fullName").value.trim(),email:document.getElementById("email").value.trim(),phone:document.getElementById("phone").value.trim(),address:document.getElementById("address").value.trim(),city:document.getElementById("city").value.trim(),postal:document.getElementById("postal").value.trim(),country:document.getElementById("country").value.trim(),notes:document.getElementById("notes").value.trim()},placedAt:new Date().toISOString(),arrival:{start:start.toDateString(),end:end.toDateString()}};
-localStorage.setItem("tinyBloomReceipt",JSON.stringify(data));
-localStorage.removeItem("tinyBloomOrder");
-location.href="thank-you.html";
+const order = JSON.parse(localStorage.getItem("tinyBloomOrder") || "null");
+if(!order){ location.href = "shop.html"; }
+document.getElementById("sName").textContent = order.name;
+document.getElementById("sQty").textContent = "Qty " + order.qty;
+document.getElementById("sSub").textContent = "$" + order.total;
+document.getElementById("sTotal").textContent = "$" + order.total;
+document.getElementById("thumb").style.backgroundImage = "url('" + order.img + "')";
+
+document.getElementById("checkoutForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const btn = e.target.querySelector("button[type=submit]");
+  if (btn) { btn.disabled = true; btn.textContent = "PLACING ORDER…"; }
+
+  const customer = {
+    fullName: document.getElementById("fullName").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    address: document.getElementById("address").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    postal: document.getElementById("postal").value.trim(),
+    country: document.getElementById("country").value.trim(),
+    notes: document.getElementById("notes").value.trim()
+  };
+
+  const start = new Date(); start.setDate(start.getDate()+7);
+  const end = new Date(); end.setDate(end.getDate()+12);
+  const arrival = { start: start.toDateString(), end: end.toDateString() };
+
+  let receipt = { order: order, customer: customer, placedAt: new Date().toISOString(), arrival: arrival };
+
+  try {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productId: order.id, quantity: order.qty, customer: customer })
+    });
+    const json = await res.json();
+    if (json && json.ok && json.order) {
+      receipt.orderCode = json.order.orderCode;
+      receipt.arrival = json.order.arrival || arrival;
+      receipt.order.total = json.order.total;
+    } else if (json && json.error) {
+      alert(json.error);
+      if (btn) { btn.disabled = false; btn.textContent = "PLACE ORDER →"; }
+      return;
+    }
+  } catch (err) {
+    console.warn("Backend offline, saving order locally only", err);
+  }
+
+  localStorage.setItem("tinyBloomReceipt", JSON.stringify(receipt));
+  localStorage.removeItem("tinyBloomOrder");
+  location.href = "thank-you.html";
 });
 </script>
 </body>
