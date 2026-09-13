@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "id": "TB-MTZXQ8AH-LKIP",
+    "orderCode": "TB-MTZXQ8AH-LKIP",
+    "productId": "little-lily",
+    "productName": "Little Lily",
+    "unitPrice": 289,
+    "quantity": 1,
+    "total": 289,
+    "customer": {
+      "fullName": "Nduonige Courage",
+      "email": "admin@foodgo.mt",
+      "phone": "+237683912211",
+      "address": "Bastos",
+      "city": "yaounde",
+      "postal": "12332",
+      "country": "Cameroon",
+      "notes": "gyuyu"
+    },
+    "status": "pending",
+    "arrival": {
+      "start": "Sun Sep 20 2026",
+      "end": "Fri Sep 25 2026"
+    },
+    "createdAt": "2026-09-13T14:54:25.146Z"
+  }
+]
