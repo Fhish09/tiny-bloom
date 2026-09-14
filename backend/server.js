@@ -60,10 +60,10 @@ function writeJson(file, data) {
 }
 function sendJson(res, status, data) {
   const body = JSON.stringify(data);
-  res.writeHead(status, {
+    res.writeHead(status, {
     "Content-Type": "application/json; charset=utf-8",
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+      "Access-Control-Allow-Methods": "GET,POST,PATCH,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, x-admin-key",
   });
   res.end(body);
@@ -95,6 +95,7 @@ function arrivalWindow() {
 }
 function serveStatic(req, res, pathname) {
   let rel = decodeURIComponent(pathname);
+  if (rel === "/admin" || rel === "/admin/") rel = "/admin.html";
   if (rel === "/") rel = "/index.html";
   const filePath = path.normalize(path.join(ROOT, rel));
   if (!filePath.startsWith(ROOT)) {
@@ -121,7 +122,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+      "Access-Control-Allow-Methods": "GET,POST,PATCH,OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, x-admin-key",
     });
     return res.end();
@@ -190,6 +191,63 @@ const server = http.createServer(async (req, res) => {
       const key = url.searchParams.get("key") || req.headers["x-admin-key"];
       if (key !== ADMIN_KEY) return sendJson(res, 401, { ok: false, error: "Unauthorized" });
       return sendJson(res, 200, { ok: true, orders: readJson(ORDERS_FILE) });
+    }
+    if (req.method === "PATCH" && pathname.startsWith("/api/admin/orders/")) {
+      const key = req.headers["x-admin-key"] || url.searchParams.get("key");
+      if (key !== ADMIN_KEY) return sendJson(res, 401, { ok: false, error: "Unauthorized" });
+      const code = decodeURIComponent(pathname.split("/").pop());
+      const body = await readBody(req);
+      const allowed = ["pending", "confirmed", "packed", "shipped", "delivered", "cancelled"];
+      const status = String(body.status || "").trim().toLowerCase();
+      if (!allowed.includes(status)) return sendJson(res, 400, { ok: false, error: "Invalid order status" });
+      const orders = readJson(ORDERS_FILE);
+      const order = orders.find((item) => item.orderCode === code || item.id === code);
+      if (!order) return sendJson(res, 404, { ok: false, error: "Order not found" });
+      order.status = status;
+      order.updatedAt = new Date().toISOString();
+      writeJson(ORDERS_FILE, orders);
+      return sendJson(res, 200, { ok: true, order });
+    }
+    if (req.method === "PATCH" && pathname.startsWith("/api/admin/products/")) {
+      const key = req.headers["x-admin-key"] || url.searchParams.get("key");
+      if (key !== ADMIN_KEY) return sendJson(res, 401, { ok: false, error: "Unauthorized" });
+      const id = decodeURIComponent(pathname.split("/").pop());
+      const body = await readBody(req);
+      const products = readJson(PRODUCTS_FILE);
+      const product = products.find((item) => item.id === id);
+      if (!product) return sendJson(res, 404, { ok: false, error: "Product not found" });
+      if (body.stock !== undefined) {
+        const stock = Number(body.stock);
+        if (!Number.isInteger(stock) || stock < 0 || stock > 10000) return sendJson(res, 400, { ok: false, error: "Stock must be a whole number from 0 to 10000" });
+        product.stock = stock;
+      }
+      if (body.price !== undefined) {
+        const price = Number(body.price);
+        if (!Number.isFinite(price) || price < 0) return sendJson(res, 400, { ok: false, error: "Price must be a positive number" });
+        product.price = Math.round(price * 100) / 100;
+      }
+      writeJson(PRODUCTS_FILE, products);
+      return sendJson(res, 200, { ok: true, product });
+    }
+    if (req.method === "POST" && pathname === "/api/admin/products") {
+      const key = req.headers["x-admin-key"] || url.searchParams.get("key");
+      if (key !== ADMIN_KEY) return sendJson(res, 401, { ok: false, error: "Unauthorized" });
+      const body = await readBody(req);
+      const id = String(body.id || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      const name = String(body.name || "").trim();
+      const description = String(body.description || "").trim();
+      const image = String(body.image || "").trim();
+      const price = Number(body.price);
+      const stock = Number(body.stock);
+      if (!id || !name || !description || !image) return sendJson(res, 400, { ok: false, error: "ID, name, description, and image are required" });
+      if (!Number.isFinite(price) || price < 0) return sendJson(res, 400, { ok: false, error: "Price must be a positive number" });
+      if (!Number.isInteger(stock) || stock < 0 || stock > 10000) return sendJson(res, 400, { ok: false, error: "Stock must be a whole number from 0 to 10000" });
+      const products = readJson(PRODUCTS_FILE);
+      if (products.some((product) => product.id === id)) return sendJson(res, 409, { ok: false, error: "A product with that ID already exists" });
+      const product = { id, name, price: Math.round(price * 100) / 100, salePrice: null, rating: "★★★★★", image, description, stock };
+      products.push(product);
+      writeJson(PRODUCTS_FILE, products);
+      return sendJson(res, 201, { ok: true, product });
     }
     return serveStatic(req, res, pathname);
   } catch (err) {

@@ -1,0 +1,945 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiny Bloom | Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&family=Allura&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4eee7;
+  --ink: #25150f;
+  --muted: #806d60;
+  --line: #dfd1c3;
+  --card: #fffaf5;
+  --gold: #9b6335;
+  --green: #3f745a;
+  --red: #a14c42;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.shell { min-height: 100vh; }
+
+.topbar {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 5vw, 70px);
+  background: #25150f;
+  color: #f5e5d3;
+}
+
+.brand {
+  font: 500 28px "Libre Baskerville", serif;
+  letter-spacing: 1px;
+}
+
+.brand span { color: #d2a06a; }
+
+.admin-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #d7b795;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+  padding: 30px 18px;
+  border-right: 1px solid var(--line);
+  background: #eee5dc;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  color: var(--muted);
+  font: 500 12px "Source Sans 3", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebar button.active,
+.sidebar button:hover {
+  background: #dfc2a4;
+  color: #3b2113;
+}
+
+.sidebar-note {
+  margin: 45px 14px 0;
+  color: #9a8778;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.content {
+  max-width: 1400px;
+  width: 100%;
+  padding: 36px clamp(20px, 4vw, 55px) 70px;
+}
+
+.heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.heading h1 {
+  margin: 7px 0 0;
+  font: 500 clamp(38px, 5vw, 58px) / 0.95 "Libre Baskerville", serif;
+}
+
+.logout {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.metric {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.metric strong {
+  display: block;
+  margin-top: 8px;
+  font: 500 29px "Libre Baskerville", serif;
+  color: var(--gold);
+}
+
+.panel {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  margin-bottom: 24px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.panel h2 {
+  margin: 0;
+  font: 500 28px "Libre Baskerville", serif;
+}
+
+.tools {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tools input,
+.tools select {
+  height: 36px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--ink);
+  font: 12px "Source Sans 3", sans-serif;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 740px;
+}
+
+th {
+  padding: 10px 8px;
+  text-align: left;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+}
+
+td {
+  padding: 13px 8px;
+  border-bottom: 1px solid #eee4db;
+  color: #59473b;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.order-code {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.customer {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.customer small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.status {
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font: 500 10px "Source Sans 3", sans-serif;
+  cursor: pointer;
+}
+
+.status.pending { background: #f3e6c8; color: #8b6721; }
+.status.confirmed,
+.status.packed { background: #e8ddf0; color: #6e4d80; }
+.status.shipped { background: #dceaf3; color: #34617c; }
+.status.delivered { background: #dceee2; color: var(--green); }
+.status.cancelled { background: #f5deda; color: var(--red); }
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.product {
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.product-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product img {
+  width: 55px;
+  height: 65px;
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+.product h3 {
+  margin: 0;
+  font: 500 21px "Libre Baskerville", serif;
+}
+
+.product p {
+  margin: 3px 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.stock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: 8px;
+}
+
+.stock-row label {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.stock-row input {
+  width: 70px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: 12px "Source Sans 3", sans-serif;
+}
+
+.save-stock {
+  border: 0;
+  background: transparent;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+.price-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.price-row label {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.price-row input {
+  width: 75px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: 12px "Source Sans 3", sans-serif;
+}
+
+.save-price {
+  border: 0;
+  background: transparent;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.empty,
+.error {
+  padding: 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.error {
+  color: var(--red);
+}
+
+.login {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  background: rgba(37, 21, 15, 0.97);
+}
+
+.login-card {
+  width: min(410px, calc(100% - 36px));
+  padding: 34px;
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+.login-card h1 {
+  margin: 0;
+  font: 500 40px "Libre Baskerville", serif;
+}
+
+.login-card p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.login-card label {
+  display: block;
+  margin: 24px 0 7px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.login-card input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font: 13px "Source Sans 3", sans-serif;
+}
+
+.login-card button {
+  width: 100%;
+  height: 45px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: 7px;
+  background: #9b6335;
+  color: #fff;
+  font: 600 11px "Source Sans 3", sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-card button:hover {
+  background: #7d5129;
+}
+
+.login-error {
+  min-height: 17px;
+  color: var(--red);
+  font-size: 11px;
+  margin-top: 10px;
+}
+
+.product-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.product-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.product-form input,
+.product-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--ink);
+  font: 12px "Source Sans 3", sans-serif;
+}
+
+.product-form textarea {
+  min-height: 78px;
+  resize: vertical;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.product-form .wide {
+  grid-column: 1 / -1;
+}
+
+.product-form button {
+  width: max-content;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--gold);
+  color: #fff;
+  font: 600 10px "Source Sans 3", sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.product-form button:hover {
+  background: #7d5129;
+}
+
+.product-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.product-form-message {
+  min-height: 17px;
+  grid-column: 1 / -1;
+  font-size: 11px;
+  color: var(--green);
+}
+
+.product-form-message.error {
+  color: var(--red);
+}
+
+.product-form-message.success {
+  color: var(--green);
+}
+
+@media (max-width: 1050px) {
+  .inventory { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .layout { display: block; }
+  .sidebar {
+    display: flex;
+    gap: 5px;
+    overflow: auto;
+    padding: 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .sidebar button { min-width: max-content; width: auto; }
+  .sidebar-note { display: none; }
+  .content { padding: 28px 16px 50px; }
+  .heading { align-items: start; flex-direction: column; margin-bottom: 22px; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .panel { padding: 16px; }
+  .panel-head { align-items: start; flex-direction: column; }
+  .inventory { grid-template-columns: 1fr; }
+  .topbar { height: 68px; padding: 0 18px; }
+  .brand { font-size: 25px; }
+  .admin-label { font-size: 8px; }
+  .table-wrap { margin: 0 -5px; }
+  .product-form { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 390px) {
+  .metrics { gap: 8px; }
+  .metric { padding: 14px; }
+  .metric strong { font-size: 25px; }
+  .product-form .wide { grid-column: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="login" id="login">
+  <form class="login-card" id="loginForm">
+    <div class="eyebrow">Tiny Bloom Admin</div>
+    <h1>Welcome back.</h1>
+    <p>Enter the admin key to manage orders and inventory.</p>
+    <label for="adminKey">Admin Key</label>
+    <input id="adminKey" type="password" autocomplete="current-password" required>
+    <button type="submit">Open Dashboard</button>
+    <div class="login-error" id="loginError"></div>
+  </form>
+</div>
+
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">Tiny <span>Bloom</span></div>
+    <div class="admin-label">Store Operations</div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <button class="active" type="button" onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})">Overview</button>
+      <button type="button" onclick="document.getElementById('ordersPanel').scrollIntoView({behavior:'smooth'})">Orders</button>
+      <button type="button" onclick="document.getElementById('inventoryPanel').scrollIntoView({behavior:'smooth'})">Inventory</button>
+      <button type="button" onclick="document.getElementById('addProductPanel').scrollIntoView({behavior:'smooth'})">Add Product</button>
+      <p class="sidebar-note">Keep customer orders moving, watch stock levels, and update each doll's fulfillment status.</p>
+    </aside>
+
+    <main class="content">
+      <div class="heading" id="overview">
+        <div>
+          <div class="eyebrow">Store Overview</div>
+          <h1>Good morning, curator.</h1>
+        </div>
+        <button class="logout" id="logout" type="button">Sign Out</button>
+      </div>
+
+      <section class="metrics">
+        <div class="metric">
+          <span>Total Orders</span>
+          <strong id="totalOrders">0</strong>
+        </div>
+        <div class="metric">
+          <span>Awaiting Action</span>
+          <strong id="openOrders">0</strong>
+        </div>
+        <div class="metric">
+          <span>Revenue</span>
+          <strong id="revenue">$0</strong>
+        </div>
+        <div class="metric">
+          <span>Low Stock</span>
+          <strong id="lowStock">0</strong>
+        </div>
+      </section>
+
+      <section class="panel" id="ordersPanel">
+        <div class="panel-head">
+          <h2>Recent Orders</h2>
+          <div class="tools">
+            <input id="orderSearch" type="search" placeholder="Search orders">
+            <select id="statusFilter">
+              <option value="">All statuses</option>
+              <option>pending</option>
+              <option>confirmed</option>
+              <option>packed</option>
+              <option>shipped</option>
+              <option>delivered</option>
+              <option>cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div id="ordersState" class="empty">Loading orders...</div>
+        <div class="table-wrap">
+          <table hidden id="ordersTable">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" id="inventoryPanel">
+        <div class="panel-head">
+          <h2>Inventory</h2>
+          <div class="eyebrow">Manage Stock & Prices</div>
+        </div>
+        <div id="inventoryState" class="empty">Loading products...</div>
+        <div class="inventory" id="inventory"></div>
+      </section>
+
+      <section class="panel" id="addProductPanel">
+        <div class="panel-head">
+          <h2>Add New Product</h2>
+        </div>
+        <form class="product-form" id="addProductForm">
+          <label>
+            Product ID
+            <input id="productId" type="text" placeholder="e.g., rose-petal" required>
+          </label>
+          <label>
+            Product Name
+            <input id="productName" type="text" placeholder="e.g., Rose Petal" required>
+          </label>
+          <label>
+            Price
+            <input id="productPrice" type="number" placeholder="349" step="0.01" min="0" required>
+          </label>
+          <label>
+            Starting Stock
+            <input id="productStock" type="number" placeholder="5" min="0" max="10000" required>
+          </label>
+          <label class="wide">
+            Description
+            <textarea id="productDesc" placeholder="Full-body platinum silicone with..." required></textarea>
+          </label>
+          <label class="wide">
+            Image URL
+            <input id="productImg" type="url" placeholder="https://... or images/doll.jpg" required>
+          </label>
+          <button class="wide" type="submit">Add Product</button>
+          <div class="product-form-message" id="productMessage"></div>
+        </form>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+const API = "/api";
+let key = sessionStorage.getItem("tinyBloomAdminKey") || "";
+let orders = [];
+let products = [];
+
+const $ = id => document.getElementById(id);
+
+function headers() {
+  return {
+    "x-admin-key": key,
+    "Content-Type": "application/json"
+  };
+}
+
+async function request(url, options = {}) {
+  const response = await fetch(url, {
+    ...options,
+    headers: { ...headers(), ...(options.headers || {}) }
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || "Request failed");
+  return data;
+}
+
+function showDashboard() {
+  $("login").style.display = "none";
+  loadDashboard();
+}
+
+async function loadDashboard() {
+  try {
+    const [orderData, productData] = await Promise.all([
+      request(API + "/admin/orders"),
+      request(API + "/products")
+    ]);
+    orders = orderData.orders || [];
+    products = productData.products || [];
+    renderMetrics();
+    renderOrders();
+    renderInventory();
+  } catch (error) {
+    $("ordersState").className = "error";
+    $("ordersState").textContent = error.message;
+    $("inventoryState").textContent = "";
+  }
+}
+
+function renderMetrics() {
+  const open = orders.filter(order => !["delivered", "cancelled"].includes(order.status)).length;
+  const revenue = orders.filter(order => order.status !== "cancelled").reduce((sum, order) => sum + Number(order.total || 0), 0);
+  $("totalOrders").textContent = orders.length;
+  $("openOrders").textContent = open;
+  $("revenue").textContent = "$" + revenue.toLocaleString();
+  $("lowStock").textContent = products.filter(product => Number(product.stock) < 4).length;
+}
+
+function renderOrders() {
+  const search = $("orderSearch").value.toLowerCase().trim();
+  const filter = $("statusFilter").value;
+  const visible = orders.filter(order => {
+    const haystack = [order.orderCode, order.productName, order.customer?.fullName, order.customer?.email].join(" ").toLowerCase();
+    return (!search || haystack.includes(search)) && (!filter || order.status === filter);
+  });
+  $("ordersState").style.display = visible.length ? "none" : "block";
+  $("ordersTable").hidden = !visible.length;
+  $("ordersBody").innerHTML = visible.map(order => `
+    <tr>
+      <td class="order-code">${order.orderCode}</td>
+      <td class="customer">
+        ${order.customer.fullName}
+        <small>${order.customer.email}</small>
+      </td>
+      <td>${order.productName}<small>Qty ${order.quantity}</small></td>
+      <td>$${Number(order.total).toLocaleString()}</td>
+      <td>${new Date(order.createdAt).toLocaleDateString()}</td>
+      <td>
+        <select class="status ${order.status}" data-order="${order.orderCode}">
+          ${["pending", "confirmed", "packed", "shipped", "delivered", "cancelled"]
+            .map(status => `<option ${status === order.status ? "selected" : ""}>${status}</option>`)
+            .join("")}
+        </select>
+      </td>
+    </tr>
+  `).join("");
+  document.querySelectorAll("[data-order]").forEach(select =>
+    select.addEventListener("change", () => updateOrder(select.dataset.order, select.value))
+  );
+}
+
+async function updateOrder(code, status) {
+  try {
+    await request(API + "/admin/orders/" + encodeURIComponent(code), {
+      method: "PATCH",
+      body: JSON.stringify({ status })
+    });
+    const order = orders.find(item => item.orderCode === code);
+    if (order) order.status = status;
+    renderMetrics();
+    renderOrders();
+  } catch (error) {
+    alert(error.message);
+    renderOrders();
+  }
+}
+
+function renderInventory() {
+  $("inventoryState").style.display = products.length ? "none" : "block";
+  $("inventory").innerHTML = products.map(product => `
+    <article class="product">
+      <div class="product-top">
+        <img src="${product.image}" alt="${product.name}">
+        <div>
+          <h3>${product.name}</h3>
+          <p>$${Number(product.price).toFixed(2)} &#183; ${product.stock} in stock</p>
+        </div>
+      </div>
+      <div class="stock-row">
+        <label for="stock-${product.id}">Stock</label>
+        <input id="stock-${product.id}" type="number" min="0" max="10000" value="${product.stock}">
+        <button class="save-stock" data-product="${product.id}">Save</button>
+      </div>
+      <div class="price-row">
+        <label for="price-${product.id}">Price:</label>
+        <input id="price-${product.id}" type="number" step="0.01" min="0" value="${Number(product.price).toFixed(2)}">
+        <button class="save-price" data-product="${product.id}">Apply</button>
+      </div>
+    </article>
+  `).join("");
+  
+  document.querySelectorAll(".save-stock").forEach(button =>
+    button.addEventListener("click", () => updateStock(button.dataset.product))
+  );
+  document.querySelectorAll(".save-price").forEach(button =>
+    button.addEventListener("click", () => updatePrice(button.dataset.product))
+  );
+}
+
+async function updateStock(id) {
+  const input = $("stock-" + id);
+  try {
+    const data = await request(API + "/admin/products/" + encodeURIComponent(id), {
+      method: "PATCH",
+      body: JSON.stringify({ stock: Number(input.value) })
+    });
+    const product = products.find(item => item.id === id);
+    if (product) product.stock = data.product.stock;
+    renderMetrics();
+    renderInventory();
+  } catch (error) {
+    alert(error.message);
+    renderInventory();
+  }
+}
+
+async function updatePrice(id) {
+  const input = $("price-" + id);
+  try {
+    const data = await request(API + "/admin/products/" + encodeURIComponent(id), {
+      method: "PATCH",
+      body: JSON.stringify({ price: Number(input.value) })
+    });
+    const product = products.find(item => item.id === id);
+    if (product) product.price = data.product.price;
+    renderMetrics();
+    renderInventory();
+  } catch (error) {
+    alert(error.message);
+    renderInventory();
+  }
+}
+
+$("addProductForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  const msg = $("productMessage");
+  msg.className = "";
+  msg.textContent = "";
+  const btn = event.target.querySelector("button[type=submit]");
+  btn.disabled = true;
+  btn.textContent = "Adding...";
+  
+  try {
+    const data = await request(API + "/admin/products", {
+      method: "POST",
+      body: JSON.stringify({
+        id: $("productId").value,
+        name: $("productName").value,
+        price: Number($("productPrice").value),
+        stock: Number($("productStock").value),
+        description: $("productDesc").value,
+        image: $("productImg").value
+      })
+    });
+    products.push(data.product);
+    msg.className = "success";
+    msg.textContent = `Product ${data.product.name} added!`;
+    $("addProductForm").reset();
+    setTimeout(() => { msg.textContent = ""; }, 4000);
+    renderMetrics();
+    renderInventory();
+  } catch (error) {
+    msg.className = "error";
+    msg.textContent = error.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Add Product";
+  }
+});
+
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  key = $("adminKey").value.trim();
+  
+  if (location.protocol === "file:") {
+    $("loginError").textContent = "Open http://localhost:3000/admin.html while the backend is running.";
+    return;
+  }
+  
+  try {
+    await request(API + "/admin/orders");
+    sessionStorage.setItem("tinyBloomAdminKey", key);
+    showDashboard();
+  } catch (error) {
+    $("loginError").textContent = error.message === "Failed to fetch"
+      ? "Backend unavailable. Start it with npm start in the backend folder."
+      : "That admin key was not accepted.";
+  }
+});
+
+$("logout").addEventListener("click", () => {
+  sessionStorage.removeItem("tinyBloomAdminKey");
+  location.reload();
+});
+
+$("orderSearch").addEventListener("input", renderOrders);
+$("statusFilter").addEventListener("change", renderOrders);
+
+if (key) showDashboard();
+</script>
+
+</body>
+</html>
+
+
+
+

@@ -70,5 +70,25 @@
     "image": "images/luna.jpg",
     "description": "Exquisite hand-painted skin, rooted hair and a calm, peaceful expression.",
     "stock": 5
+  },
+  {
+    "id": "test-doll",
+    "name": "Test Doll",
+    "price": 399,
+    "salePrice": null,
+    "rating": "★★★★★",
+    "image": "images/test.jpg",
+    "description": "A test product",
+    "stock": 5
+  },
+  {
+    "id": "rose-garden",
+    "name": "Rose Garden",
+    "price": 349,
+    "salePrice": null,
+    "rating": "★★★★★",
+    "image": "images/rose-garden.jpg",
+    "description": "Premium silicone doll",
+    "stock": 4
   }
 ]

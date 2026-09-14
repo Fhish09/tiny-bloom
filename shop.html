@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,27 +6,27 @@
 <title>Shop | Tiny Bloom</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&family=Allura&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"DM Sans",sans-serif;background:#160d0a;color:#f1dfc8;min-height:100vh}
+body{font-family:"Source Sans 3",sans-serif;background:#160d0a;color:#f1dfc8;min-height:100vh}
 a{color:inherit;text-decoration:none}
 .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:20px 5%;border-bottom:1px solid rgba(224,178,123,.12);background:rgba(18,9,6,.92);backdrop-filter:blur(12px)}
-.logo{font-family:"Cormorant Garamond",serif;font-size:24px;color:#ead3b5;letter-spacing:1px}
+.logo{font-family:"Libre Baskerville",serif;font-size:24px;color:#ead3b5;letter-spacing:1px}
 .logo span{color:#c99a63}
 .topbar nav{display:flex;gap:28px;font-size:12px;color:#dbc4aa}
 .topbar nav a:hover{color:#d2a06a}
 .page{max-width:1200px;margin:0 auto;padding:50px 5% 80px}
 .page-head{text-align:center;margin-bottom:48px}
 .page-head .eyebrow{color:#c99a63;font-size:10px;letter-spacing:4px;margin-bottom:14px}
-.page-head h1{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(36px,5vw,56px);color:#ead8c2}
+.page-head h1{font-family:"Libre Baskerville",serif;font-weight:400;font-size:clamp(36px,5vw,56px);color:#ead8c2}
 .page-head p{max-width:420px;margin:14px auto 0;color:#a9917d;font-size:14px;line-height:1.7}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
 .card{border-radius:20px;border:1px solid rgba(210,160,105,.16);background:#281711;overflow:hidden;transition:transform .35s ease}
 .card:hover{transform:translateY(-6px)}
 .card-img{height:280px;background-size:cover;background-position:center top}
 .card-body{padding:18px}
-.card-body h3{font-family:"Cormorant Garamond",serif;font-size:22px;color:#e7ceb1;font-weight:500}
+.card-body h3{font-family:"Libre Baskerville",serif;font-size:22px;color:#e7ceb1;font-weight:500}
 .card-body .desc{color:#9d8673;font-size:12px;line-height:1.55;margin:8px 0 14px;min-height:54px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .price{font-size:17px;color:#d2a06a;font-weight:600}
@@ -50,21 +50,21 @@ a{color:inherit;text-decoration:none}
   <div class="page-head">
     <div class="eyebrow">OUR COLLECTION</div>
     <h1>Shop Little Ones</h1>
-    <p>Handcrafted silicone & reborn dolls — choose a companion, then complete your order.</p>
+    <p>Handcrafted silicone &amp; reborn dolls &mdash; choose a companion, then complete your order.</p>
   </div>
   <div class="grid" id="shopGrid"></div>
-  <p class="footer-note">© 2026 Tiny Bloom</p>
+  <p class="footer-note">&#169; 2026 Tiny Bloom</p>
 </main>
 <script>
 const PRODUCTS = [
-  {id:"sweet-willow", name:"Sweet Willow", price:349, rating:"★★★★★", img:"images/sweet-willow.jpg", desc:"Full-body platinum silicone newborn with hand-painted skin and soft rooted hair."},
-  {id:"little-lily", name:"Little Lily", price:289, rating:"★★★★★", img:"images/little-lily.jpg", desc:"Sleeping reborn with gentle closed eyes, finely painted lashes and a softly weighted body."},
-  {id:"baby-rose", name:"Baby Rose", price:319, rating:"★★★★☆", img:"images/baby-rose.jpg", desc:"Soft platinum silicone with hand-finished rosy cheeks and tiny detailed fingers and toes."},
-  {id:"mia-grace", name:"Mia Grace", price:379, rating:"★★★★★", img:"images/mia-grace.jpg", desc:"Awake expression with rooted lashes, subtle skin veining and mottling."},
-  {id:"emma-bloom", name:"Emma Bloom", price:259, rating:"★★★★★", img:"images/emma-bloom.jpg", desc:"Handcrafted finish with a soft rounded belly and translucent skin layers."},
-  {id:"sofia", name:"Sofia", price:429, rating:"★★★★★", img:"images/sofia.jpg", desc:"Premium full-body silicone with an open mouth and soft flexible limbs."},
-  {id:"amelia", name:"Amelia", price:299, rating:"★★★★☆", img:"images/amelia.jpg", desc:"Soft skin texture, carefully weighted body and a gentle sleeping face."},
-  {id:"luna", name:"Luna", price:399, rating:"★★★★★", img:"images/luna.jpg", desc:"Exquisite hand-painted skin, rooted hair and a calm peaceful expression."}
+  {id:"sweet-willow", name:"Sweet Willow", price:349, rating:"\u2605\u2605\u2605\u2605\u2605", img:"images/sweet-willow.jpg", desc:"Full-body platinum silicone newborn with hand-painted skin and soft rooted hair."},
+  {id:"little-lily", name:"Little Lily", price:289, rating:"\u2605\u2605\u2605\u2605\u2605", img:"images/little-lily.jpg", desc:"Sleeping reborn with gentle closed eyes, finely painted lashes and a softly weighted body."},
+  {id:"baby-rose", name:"Baby Rose", price:319, rating:"\u2605\u2605\u2605\u2605\u2606", img:"images/baby-rose.jpg", desc:"Soft platinum silicone with hand-finished rosy cheeks and tiny detailed fingers and toes."},
+  {id:"mia-grace", name:"Mia Grace", price:379, rating:"\u2605\u2605\u2605\u2605\u2605", img:"images/mia-grace.jpg", desc:"Awake expression with rooted lashes, subtle skin veining and mottling."},
+  {id:"emma-bloom", name:"Emma Bloom", price:259, rating:"\u2605\u2605\u2605\u2605\u2605", img:"images/emma-bloom.jpg", desc:"Handcrafted finish with a soft rounded belly and translucent skin layers."},
+  {id:"sofia", name:"Sofia", price:429, rating:"\u2605\u2605\u2605\u2605\u2605", img:"images/sofia.jpg", desc:"Premium full-body silicone with an open mouth and soft flexible limbs."},
+  {id:"amelia", name:"Amelia", price:299, rating:"\u2605\u2605\u2605\u2605\u2606", img:"images/amelia.jpg", desc:"Soft skin texture, carefully weighted body and a gentle sleeping face."},
+  {id:"luna", name:"Luna", price:399, rating:"\u2605\u2605\u2605\u2605\u2605", img:"images/luna.jpg", desc:"Exquisite hand-painted skin, rooted hair and a calm peaceful expression."}
 ];
 document.getElementById("shopGrid").innerHTML = PRODUCTS.map(p => `
   <article class="card">
@@ -73,9 +73,13 @@ document.getElementById("shopGrid").innerHTML = PRODUCTS.map(p => `
       <h3>${p.name}</h3>
       <p class="desc">${p.desc}</p>
       <div class="row"><span class="price">$${p.price}</span><span class="rating">${p.rating}</span></div>
-      <a class="btn" href="product.html?id=${p.id}">SEE MORE →</a>
+      <a class="btn" href="product.html?id=${p.id}">SEE MORE &rarr;</a>
     </div>
   </article>`).join("");
 </script>
 </body>
 </html>
+
+
+
+
